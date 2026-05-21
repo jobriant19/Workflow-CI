@@ -8,12 +8,11 @@ def train():
     X = df.drop(columns=['FLAG'])
     y = df['FLAG']
 
-    # KUNCI SOLUSI: Kita buat konfigurasi environment yang stabil secara manual
     stabil_env = {
         "name": "ethereum-fraud-env",
-        "channels": ["conda-forge"],
+        "channels": ["conda-forge", "nodefaults"], 
         "dependencies": [
-            "python=3.10.12",  # Mengunci versi Python yang paling stabil untuk Docker
+            "python=3.10.12",  
             "pip",
             {"pip": ["pandas", "numpy", "scikit-learn", "mlflow==2.19.0"]}
         ]
@@ -23,7 +22,7 @@ def train():
         rf = RandomForestClassifier(n_estimators=50, max_depth=10, random_state=42)
         rf.fit(X, y)
         
-        # Menyematkan environment yang stabil ke dalam model yang disimpan
+        # Menyematkan environment yang kebal ToS ke dalam model
         mlflow.sklearn.log_model(rf, "model", conda_env=stabil_env)
         
         print(f"✅ Model berhasil dilatih dan di-log dengan Run ID: {run.info.run_id}")
