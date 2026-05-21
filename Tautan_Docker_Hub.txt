@@ -1,0 +1,1 @@
+https://hub.docker.com/repository/docker/jobriant19/ethereum_fraud_model
