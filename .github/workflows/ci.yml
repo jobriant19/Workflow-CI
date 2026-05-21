@@ -44,7 +44,7 @@ jobs:
     - name: Build Docker Model
       run: |
         # Membangun docker image dari artefak model MLflow
-        mlflow models build-docker -m "runs:/${{ env.RUN_ID }}/model" -n ${{ secrets.DOCKER_USERNAME }}/ethereum_fraud_model:latest
+        mlflow models build-docker -m "runs:/${{ env.RUN_ID }}/model" -n ${{ secrets.DOCKER_USERNAME }}/ethereum_fraud_model:latest --env-manager conda
 
     - name: Push Docker Image
       run: |
